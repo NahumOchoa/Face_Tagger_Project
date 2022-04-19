@@ -1,7 +1,10 @@
+
 import PySimpleGUI as sg
 import os
 from PIL import Image, ImageTk
 import io
+
+from numpy import size
 
 class Tagger_Viewer_UI:
     def __init__(self):
@@ -23,7 +26,7 @@ class Tagger_Viewer_UI:
         self._Url_Viewer_Object = Url_Viewer_Object_v
 
     def show_interface(self):
-   
+        sg.theme('DarkGrey14')
         start_viewer = self.Url_Viewer_Object.show_interface()
         
         fnames = start_viewer[1]
@@ -32,25 +35,23 @@ class Tagger_Viewer_UI:
         self.Tagger_Viewer_Logic_Object.file_name = filename
         image_elem = sg.Image(data=self.Tagger_Viewer_Logic_Object.img_data( first=True),size=(400, 400))
         filename_display_elem = sg.Text(filename, size=(47,3 ))
-        file_num_display_elem = sg.Text('File 1 of {}'.format(start_viewer[2]), size=(15, 1))
+        file_num_display_elem = sg.Text('File 1 of {}'.format(start_viewer[2]), size=(7, 1))
         tab_menu_attrib_object = self.excel_data
         tab_menu_attrib_object.tab_menu_atrib_values
         tab_menu_attrib_object.tab_menu_atrib_names
         tab_menu_attrib_object.tab_menu_atrib_layout
         
-        tab_group = self.Tagger_Viewer_Logic_Object.tab_create(tab_menu_attrib_object)            
+        tab_group = self.Tagger_Viewer_Logic_Object.tab_create(tab_menu_attrib_object,file_num_display_elem)            
         # define layout, show and read the form
         col = [[filename_display_elem],
             [image_elem]]
 
-        col_files = [[sg.Listbox(values=fnames, change_submits=True, size=(30, 20), key='listbox')],
-                    [sg.Button('Next', size=(8, 2)), sg.Button('Prev', size=(6, 2)), file_num_display_elem]]
-
-        layout = [[sg.Column(col_files, vertical_alignment='center'), sg.Column(col,element_justification="center"),sg.Column(tab_group)]]
-
+        col_files = [[sg.Listbox(values=fnames, change_submits=True, size=(30, 10), key='listbox')]]
+        layout = [[sg.Column(col_files), sg.Column(col,element_justification="center"),sg.Column(tab_group)]]
+        
         window = sg.Window('Image Browser', layout, return_keyboard_events=True,
-                        location=(0,0), use_default_focus=False, size=(820,580),margins=(0,0),element_justification="center")
-    
+                         use_default_focus=False, size=(1020,500),margins=(0,0),element_justification="center")
+        
         self.Tagger_Viewer_Logic_Object.update_img(window,start_viewer,fnames,image_elem,filename_display_elem,file_num_display_elem,tab_menu_attrib_object)
         window.close()
 
@@ -108,7 +109,7 @@ class Tagger_Viewer_Logic:
             return bio.getvalue()
         return ImageTk.PhotoImage(new_image)
 
-    def tab_create(self, tab_menu_attrib):
+    def tab_create(self, tab_menu_attrib,file_num_display_elem):
         i = 0
         temp = 0
         group =[]
@@ -152,14 +153,14 @@ class Tagger_Viewer_Logic:
                     print('no hay nada')
                 group.append(j)
             
-            tab_group_temp.append([sg.Tab(f'{tab_menu_attrib.sheet_names[i]}', layoutTab, title_color='Red',border_width =10, background_color='Green')])
+            tab_group_temp.append([sg.Tab(f'{tab_menu_attrib.sheet_names[i]}', layoutTab, title_color='white',border_width =100)])
             
             
             i = i+1
         self.group_size = group
         print(self.group_size)   
         print(self.group_type)                   
-        tab_group_final = [[sg.TabGroup(tab_group_temp)],[sg.Button('Save', size=(10, 2))]] 
+        tab_group_final = [[sg.TabGroup(tab_group_temp,size=(300,300))],[sg.Button('Save', size=(8, 2)), sg.Button('Next', size=(8, 2)), sg.Button('Prev', size=(8, 2)), file_num_display_elem]]
         return tab_group_final 
 
     def group_data(self,value_temp):
