@@ -47,7 +47,7 @@ class Tagger_Viewer_UI:
             [image_elem]]
 
         col_files = [[sg.Listbox(values=fnames, change_submits=True, size=(30, 10), key='listbox')]]
-        layout = [[sg.Column(col_files), sg.Column(col,element_justification="center"),sg.Column(tab_group)]]
+        layout = [[sg.Column(col_files), sg.Column(col,element_justification="center"),sg.Column(tab_group,pad=(2,(78,20)))]]
         
         window = sg.Window('Image Browser', layout, return_keyboard_events=True,
                          use_default_focus=False, size=(1020,500),margins=(0,0),element_justification="center")
@@ -160,7 +160,7 @@ class Tagger_Viewer_Logic:
         self.group_size = group
         print(self.group_size)   
         print(self.group_type)                   
-        tab_group_final = [[sg.TabGroup(tab_group_temp,size=(300,300))],[sg.Button('Save', size=(8, 2)), sg.Button('Next', size=(8, 2)), sg.Button('Prev', size=(8, 2)), file_num_display_elem]]
+        tab_group_final = [[sg.TabGroup(tab_group_temp,size=(300,330))],[sg.Button('Save', size=(8, 2)), sg.Button('Next', size=(8, 2)), sg.Button('Prev', size=(8, 2)), file_num_display_elem]]
         return tab_group_final 
 
     def group_data(self,value_temp):
