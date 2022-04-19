@@ -30,8 +30,8 @@ class Tagger_Viewer_UI:
         filename = os.path.join(start_viewer[0], fnames[0])  # name of first file in list
        
         self.Tagger_Viewer_Logic_Object.file_name = filename
-        image_elem = sg.Image(data=self.Tagger_Viewer_Logic_Object.img_data( first=True))
-        filename_display_elem = sg.Text(filename, size=(80, 3))
+        image_elem = sg.Image(data=self.Tagger_Viewer_Logic_Object.img_data( first=True),size=(400, 400))
+        filename_display_elem = sg.Text(filename, size=(47,3 ))
         file_num_display_elem = sg.Text('File 1 of {}'.format(start_viewer[2]), size=(15, 1))
         tab_menu_attrib_object = self.excel_data
         tab_menu_attrib_object.tab_menu_atrib_values
@@ -43,13 +43,13 @@ class Tagger_Viewer_UI:
         col = [[filename_display_elem],
             [image_elem]]
 
-        col_files = [[sg.Listbox(values=fnames, change_submits=True, size=(60, 30), key='listbox')],
-                    [sg.Button('Next', size=(8, 2)), sg.Button('Prev', size=(8, 2)), file_num_display_elem]]
+        col_files = [[sg.Listbox(values=fnames, change_submits=True, size=(30, 20), key='listbox')],
+                    [sg.Button('Next', size=(8, 2)), sg.Button('Prev', size=(6, 2)), file_num_display_elem]]
 
-        layout = [[sg.Column(col_files), sg.Column(col),sg.Column(tab_group)]]
+        layout = [[sg.Column(col_files, vertical_alignment='center'), sg.Column(col,element_justification="center"),sg.Column(tab_group)]]
 
         window = sg.Window('Image Browser', layout, return_keyboard_events=True,
-                        location=(0, 0), use_default_focus=False)
+                        location=(0,0), use_default_focus=False, size=(820,580),margins=(0,0),element_justification="center")
     
         self.Tagger_Viewer_Logic_Object.update_img(window,start_viewer,fnames,image_elem,filename_display_elem,file_num_display_elem,tab_menu_attrib_object)
         window.close()
@@ -93,18 +93,20 @@ class Tagger_Viewer_Logic:
     def group_data_dict_default(self,group_data_dict_default_v):
         self._group_data_dict_default = group_data_dict_default_v
     
-    def img_data(self, maxsize=(1200, 850), first=False):
+    def img_data(self, maxsize=(400, 400), first=False):
         """
         Generate image data using PIL
         """
         img = Image.open(self.file_name)
         img.thumbnail(maxsize)
+        
+        new_image = img.resize(maxsize)
         if first:                     # tkinter is inactive the first time
             bio = io.BytesIO()
-            img.save(bio, format="PNG")
-            del img
+            new_image.save(bio, format="PNG")
+            del new_image
             return bio.getvalue()
-        return ImageTk.PhotoImage(img)
+        return ImageTk.PhotoImage(new_image)
 
     def tab_create(self, tab_menu_attrib):
         i = 0

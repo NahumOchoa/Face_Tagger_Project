@@ -11,7 +11,7 @@ class Url_Viewer_UI:
         
 
     def show_interface(self):
-        self.Url_Viewer_Logic_Object.folder = sg.popup_get_folder('Image folder to open', default_path='')
+        self.Url_Viewer_Logic_Object.folder = sg.popup_get_folder('Image folder to open', default_path='D:/videos/SKETCHES/SKETCHES/mx_sketches')
        
         if not self.Url_Viewer_Logic_Object.folder:
             sg.popup_cancel('Cancelling')
