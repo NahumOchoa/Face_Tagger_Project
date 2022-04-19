@@ -2,6 +2,7 @@
 import pandas as pd
 import ast
 from openpyxl import load_workbook
+from csv import writer
 
 class Excel_Data:
     
@@ -12,6 +13,7 @@ class Excel_Data:
         self._tab_menu_index = []
         self._phrases_data_names = {}
         self._phrases_data = {}
+        self._csv_url = None
         self._sheet_names = None
         self._excel_url = None
         
@@ -23,6 +25,13 @@ class Excel_Data:
     @excel_url.setter
     def excel_url(self,excel_url_v):
         self._excel_url = excel_url_v
+
+    @property
+    def csv_url(self):
+        return self._csv_url
+    csv_url.setter
+    def csv_url(self,csv_url_v):
+        self._csv_url = csv_url_v
     @property
     def sheet_names(self):
         return self._sheet_names
@@ -107,29 +116,48 @@ class Excel_Data:
         print(self.to_dic_from_string(str(system.values[index])[2:-2:]))
         return (str(phrase.values[index])[2:-2:],self.to_dic_from_string(str(system.values[index])[2:-2:]))
 
-    def write_phrase_data(self):
-        PHRASE_EXAMPLE = f'Se seleccionaron los checkbox siguientes: {self.phrases_data[1]}, el radio buttoom siguiente: {self.phrases_data[2]} , el combobox siguiente: {self.phrases_data[3]}, el radio buttom siguiente: {self.phrases_data[4]}'
+    def write_phrase_data(self,tab_menu_attrib):
         xls = pd.ExcelFile(self.excel_url)
         df = pd.read_excel(xls,self.sheet_names[len(self.sheet_names)-1])
         df_index = df.index.stop
         wb = load_workbook(filename = self.excel_url)
         ws = wb.get_sheet_by_name(self.sheet_names[len(self.sheet_names)-1])
         ws.cell(df_index+2,1).value = self.phrases_data[0]
-        ws.cell(df_index+2,2).value = PHRASE_EXAMPLE
         ws.cell(df_index+2,3).value = str(self.phrases_data_names)
         wb.save(self.excel_url)
+        self.write_csv_data(tab_menu_attrib)
+
+    def write_csv_data(self,tab_menu_attrib):
+        i=0
+        temp = 0 
+        for n in range(0,len(tab_menu_attrib.sheet_names)-1):
+            ranges = tab_menu_attrib.tab_menu_index[i]
+            for n2 in range(0,ranges ):
+                tab_menu_attrib_temp_titles =str(tab_menu_attrib.tab_menu_atrib_names[temp])
+                list_data = [self.phrases_data[0],tab_menu_attrib.sheet_names[n],tab_menu_attrib_temp_titles[2:-2:],self.phrases_data[temp+1]]
+                with open(self.csv_url, 'a', newline='') as f_object:  
+                    # Pass the CSV  file object to the writer() function
+                    writer_object = writer(f_object)
+                    # Result - a writer object
+                    # Pass the data in the list as an argument into the writerow() function
+                    writer_object.writerow(list_data)  
+                    # Close the file object
+                    f_object.close()
+                temp =temp+1
+                
+            i = i+1
+        
 
     def modify_phrase_data(self,index):
-        PHRASE_EXAMPLE = f'Se seleccionaron los checkbox siguientes: {self.phrases_data[1]}, el radio buttoom siguiente: {self.phrases_data[2]} , el combobox siguiente: {self.phrases_data[3]}, el radio buttom siguiente: {self.phrases_data[4]}'
-        xls = pd.ExcelFile(self.excel_url)
-        df = pd.read_excel(xls,self.sheet_names[len(self.sheet_names)-1])
-        df_index = df.index.stop
         wb = load_workbook(filename = self.excel_url)
         ws = wb.get_sheet_by_name(self.sheet_names[len(self.sheet_names)-1])
         ws.cell(index+2,1).value = self.phrases_data[0]
-        ws.cell(index+2,2).value = PHRASE_EXAMPLE
         ws.cell(index+2,3).value = str(self.phrases_data_names)
         wb.save(self.excel_url)
+        
+    
+    def modify_csv_data(self):
+        pass
         
     def search_id(self,id_person):
         xls = pd.ExcelFile(self.excel_url)

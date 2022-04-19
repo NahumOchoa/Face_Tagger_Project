@@ -259,7 +259,7 @@ class Tagger_Viewer_Logic:
                     tab_menu_attrib_object.modify_phrase_data(tab_menu_attrib_object.search_id(fnames_temp[0])[1])
                 else:
                     
-                    tab_menu_attrib_object.write_phrase_data()
+                    tab_menu_attrib_object.write_phrase_data(tab_menu_attrib_object)
                 
                 filename = os.path.join(start_viewer[0], fnames[i])
                 
