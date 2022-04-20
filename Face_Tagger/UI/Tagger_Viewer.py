@@ -3,7 +3,6 @@ import PySimpleGUI as sg
 import os
 from PIL import Image, ImageTk
 import io
-
 from numpy import size
 
 class Tagger_Viewer_UI:
@@ -197,7 +196,7 @@ class Tagger_Viewer_Logic:
                         flag = 1
                         
                     elif value_temp[value_index[temp]] == True:
-                        group_data_dict_temp[i] = f'{group_data_dict_temp[i]}, {value_index[temp]}'
+                        group_data_dict_temp[i] = f'{group_data_dict_temp[i]}-{value_index[temp]}'
                         
                     temp = temp+1
                     
@@ -256,7 +255,7 @@ class Tagger_Viewer_Logic:
                 tab_menu_attrib_object.phrases_data = self.group_data_dict
                 tab_menu_attrib_object.phrases_data_names = value_temp
                 if(tab_menu_attrib_object.search_id(fnames_temp[0])[0] == True):
-                    tab_menu_attrib_object.modify_phrase_data(tab_menu_attrib_object.search_id(fnames_temp[0])[1])
+                    tab_menu_attrib_object.modify_phrase_data(tab_menu_attrib_object.search_id(fnames_temp[0])[1],tab_menu_attrib_object)
                 else:
                     
                     tab_menu_attrib_object.write_phrase_data(tab_menu_attrib_object)

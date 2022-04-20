@@ -1,5 +1,5 @@
 ID,Type,Name,Value
-Test,test1,slot1,"info1, info3"
+Test,test1,slot1,info1-info2
 Test,test1,slot2,No tiene
 Test,test1,slot3,info2
-Test,test2,test2,No tiene
+Test,test1,test2,No tiene
