@@ -2,7 +2,7 @@ from Excel_Data.Excel_Data import Excel_Data
 from UI.Tagger_Viewer import Tagger_Viewer_UI
 from UI.Url_Viewer import Url_Viewer_UI
 
-EXCEL_URL = 'Resources/TabInfo.xlsx'
+EXCEL_URL = 'Resources/TabInfo.xls'
 CSV_URL = 'Resources/Person_Data.csv'
 def main():
     Excel_Data_Object = Excel_Data()
