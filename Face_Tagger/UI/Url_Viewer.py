@@ -3,7 +3,17 @@ import os
 
 IMG_TYPES = (".png", ".jpg", "jpeg", ".tiff", ".bmp")
 
-
+"""
+--------------------------------------------
+Url_Viewer based on PySimpleGUI
+--------------------------------------------
+select the url of the files to be taken for 
+the tagger viewer
+--------------------------------------------
+class Tagger_viewer_UI
+--------------------------------------------
+Here you will find everything related to the show UI.
+"""
 
 class Url_Viewer_UI:
     def __init__(self):
@@ -24,8 +34,12 @@ class Url_Viewer_UI:
             raise SystemExit()
 
         return (self.Url_Viewer_Logic_Object.folder,self.Url_Viewer_Logic_Object.fnames,self.Url_Viewer_Logic_Object.num_files)
-        
-
+"""        
+--------------------------------------------
+class Tagger_viewer_UI
+--------------------------------------------
+Here you will find everything related to the storage data for url the images.
+"""
 class Url_Viewer_Logic:
 
     def __init__(self):
