@@ -10,7 +10,7 @@ this project was created to facilitate the process of labeling images of people,
 all the dependencies are in the requirement.txt file.
 """
 
-EXCEL_URL = 'Resources/TabInfo.xls'
+EXCEL_URL = 'Resources/TabInfo.xlsx'
 CSV_URL = 'Resources/Person_Data.csv'
 
 
