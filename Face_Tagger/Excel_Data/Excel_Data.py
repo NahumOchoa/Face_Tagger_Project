@@ -153,12 +153,16 @@ class Excel_Data:
     def write_csv_data(self, tab_menu_attrib):
         i = 0
         temp = 0
+        print(self.phrases_data)
         for n in range(0, len(tab_menu_attrib.sheet_names) - 1):
             ranges = tab_menu_attrib.tab_menu_index[i]
+
             for n2 in range(0, ranges):
                 tab_menu_attrib_temp_titles = str(tab_menu_attrib.tab_menu_atrib_names[temp])
+
                 list_data = [self.phrases_data[0], tab_menu_attrib.sheet_names[n], tab_menu_attrib_temp_titles[2:-2:],
                              self.phrases_data[temp + 1]]
+                print(self.phrases_data[temp + 1])
                 with open(self.csv_url, 'a', newline='') as f_object:
                     # Pass the CSV  file object to the writer() function
                     writer_object = writer(f_object)
@@ -185,25 +189,29 @@ class Excel_Data:
     # modify csv data for that ID
     def modify_csv_data(self, tab_menu_attrib):
         temp = 0
+        print('modify')
         # modify the csv data
         with fileinput.input(files=self.csv_url, inplace=True, mode='r') as f:
             reader = csv.DictReader(f)
             print(",".join(reader.fieldnames))  # print back the headers
-            ranges = tab_menu_attrib.tab_menu_index[0]
             n = 0
             flag = 0
+            ranges = tab_menu_attrib.tab_menu_index[flag]
+
             for row in reader:
+
+                if n == ranges:
+                    n = 0
+                    flag = flag + 1
+                    ranges = tab_menu_attrib.tab_menu_index[flag]
+
+                else:
+                    n = n + 1
+
                 tab_menu_attrib_temp_titles = str(tab_menu_attrib.tab_menu_atrib_names[temp])
                 # modify the row with the parameter ID equal to the getter
                 if row["ID"] == self.phrases_data[0]:
-                    row["Type"] = tab_menu_attrib.sheet_names[flag]
-                    row['Name'] = tab_menu_attrib_temp_titles[2:-2:]
                     row['Value'] = self.phrases_data[temp + 1]
-                    if n == ranges:
-                        n = 0
-                        flag = flag + 1
-                    else:
-                        n = n + 1
                     temp = temp + 1
 
                 print(",".join([row["ID"], row["Type"], row['Name'], row['Value']]))

@@ -51,7 +51,7 @@ class Tagger_Viewer_UI:
         fnames = start_viewer[1]  # names files
         filename = os.path.join(start_viewer[0], fnames[0])  # name of first file in list
         self.Tagger_Viewer_Logic_Object.file_name = filename  # setter
-        image_elem = sg.Image(data=self.Tagger_Viewer_Logic_Object.img_data(first=True),size=(400, 400))
+        image_elem = sg.Image(data=self.Tagger_Viewer_Logic_Object.img_data(first=True),size=(400, 400),pad=(0, 0))
         filename_display_elem = sg.Text(filename, size=(47, 3))
         file_num_display_elem = sg.Text('File 1 of {}'.format(start_viewer[2]), size=(7, 1))
         tab_menu_attrib_object = self.excel_data
@@ -66,10 +66,10 @@ class Tagger_Viewer_UI:
 
         col_files = [[sg.Listbox(values=fnames, change_submits=True, size=(30, 10), key='listbox')]]
         layout = [[sg.Column(col_files), sg.Column(col, element_justification="center"),
-                   sg.Column(tab_group, pad=(2, (78, 20)))]]
+                   sg.Column(tab_group, pad=(1, (78, 20)))]]
 
         window = sg.Window('Image Browser', layout, return_keyboard_events=True,
-                           use_default_focus=False, size=(1020, 500), margins=(0, 0), element_justification="center")
+                           use_default_focus=False, size=(1130, 500), margins=(0, 0), element_justification="center")
         # update image and logic of the tagger
 
         self.Tagger_Viewer_Logic_Object.update_img(window, start_viewer, fnames, image_elem, filename_display_elem,
@@ -226,7 +226,7 @@ class Tagger_Viewer_Logic:
             i = i + 1
         self.group_size = group
         # tab final with all components defined previously in the excel
-        tab_group_final = [[sg.TabGroup(tab_group_temp, size=(400, 330))],
+        tab_group_final = [[sg.TabGroup(tab_group_temp, size=(410, 330))],
                            [sg.Button('Save', size=(8, 2)), sg.Button('Next', size=(8, 2)),
                             sg.Button('Prev', size=(8, 2)), file_num_display_elem]]
         return tab_group_final
@@ -245,12 +245,12 @@ class Tagger_Viewer_Logic:
         for n in range(0, len(self.group_size)):
             # save the components with your classification
             if self.group_type[n] == 'Combo':
-
+                print('entro')
                 group_data_dict_temp[i] = value_temp[value_index[temp]]
                 temp = temp + 1
 
             elif self.group_type[n] == 'Radio':
-
+                print('entro')
                 if value_temp[value_index[temp]]:
                     group_data_dict_temp[i] = 'Si tiene'
 
@@ -260,7 +260,7 @@ class Tagger_Viewer_Logic:
                 temp = temp + 2
 
             elif self.group_type[n] == 'Check':
-
+                print('entro')
                 for n2 in range(0, self.group_size[n]):
 
                     if value_temp[value_index[temp]] is True and flag == 0:
@@ -299,7 +299,7 @@ class Tagger_Viewer_Logic:
                 i += 1
                 if i >= start_viewer[2]:
                     i -= start_viewer[2]
-
+                print(values)
                 fnames_temp = fnames[i].split('.')
 
                 if tab_menu_attrib_object.search_id(fnames_temp[0])[0]:
@@ -324,9 +324,11 @@ class Tagger_Viewer_Logic:
                 filename = os.path.join(start_viewer[0], fnames[i])
             elif event in ('Save', 'MouseWheel:Up', 'Up:38', 'Prior:33'):
                 value_temp = clean_data(values)
+
                 self.group_data(value_temp)
                 fnames_temp = fnames[i].split('.')
                 self.group_data_dict[0] = fnames_temp[0]
+                print(self.group_data_dict)
                 tab_menu_attrib_object.phrases_data = self.group_data_dict
                 tab_menu_attrib_object.phrases_data_names = value_temp
 
