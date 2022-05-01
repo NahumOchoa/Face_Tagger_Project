@@ -3,3 +3,15 @@ Test,test1,slot1,info1-info2
 Test,test1,slot2,No tiene
 Test,test1,slot3,info2
 Test,test1,test2,No tiene
+00002,test1,slot1,info2-info3
+00002,test1,slot2,No tiene
+00002,test1,slot3,info1
+00002,test2,test2,No tiene
+00003,test1,slot1,info1-info2-info3
+00003,test1,slot2,No tiene
+00003,test1,slot3,info2
+00003,test2,test2,No tiene
+00020,test1,slot1,info1-info2-info3
+00020,test1,slot2,No tiene
+00020,test1,slot3,info2
+00020,test1,test2,No tiene

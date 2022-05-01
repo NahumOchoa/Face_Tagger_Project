@@ -148,7 +148,7 @@ class Tagger_Viewer_Logic:
     # use PIL to read data of one image
     # ------------------------------------------------------------------------------
 
-    def img_data(self, maxsize=(400, 400), first=False):
+    def img_data(self, maxsize=(320, 320), first=False):
         """
         Generate image data using PIL
         """
@@ -226,7 +226,7 @@ class Tagger_Viewer_Logic:
             i = i + 1
         self.group_size = group
         # tab final with all components defined previously in the excel
-        tab_group_final = [[sg.TabGroup(tab_group_temp, size=(300, 330))],
+        tab_group_final = [[sg.TabGroup(tab_group_temp, size=(400, 330))],
                            [sg.Button('Save', size=(8, 2)), sg.Button('Next', size=(8, 2)),
                             sg.Button('Prev', size=(8, 2)), file_num_display_elem]]
         return tab_group_final
