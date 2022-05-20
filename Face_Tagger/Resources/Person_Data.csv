@@ -1,1 +1,53 @@
 ID,Type,Name,Value
+00002,Face,Shape,Ovalada
+00002,Hair,Texture,Liso
+00002,Hair,Symmetry,Partido a la mitad
+00002,Hair,Shape,no tiene algun
+00002,Hair,Length,Corto
+00002,Eyebrows,Shape,No tiene
+00002,Eyes,test2,No tiene
+00002,Cheeks,Shape,No tiene
+00002,Nose,test2,No tiene
+00002,Ears,Shape,No tiene
+00002,Mouth,test2,No tiene
+00002,Chin,Shape,No tiene
+00002,Others,Shape,No tiene
+00024,Face,Shape,Cuadrada
+00024,Hair,Texture,Liso
+00024,Hair,Symmetry,Partido a la mitad
+00024,Hair,Shape,no tiene algun
+00024,Hair,Length,Corto
+00024,Eyebrows,Shape,No tiene
+00024,Eyes,test2,No tiene
+00024,Cheeks,Shape,No tiene
+00024,Nose,test2,No tiene
+00024,Ears,Shape,No tiene
+00024,Mouth,test2,No tiene
+00024,Chin,Shape,No tiene
+00024,Others,Shape,No tiene
+00003,Face,Shape,Ovalada
+00003,Hair,Texture,Liso
+00003,Hair,Symmetry,Partido a la mitad
+00003,Hair,Shape,no tiene algun
+00003,Hair,Length,Corto
+00003,Eyebrows,Shape,No tiene
+00003,Eyes,test2,No tiene
+00003,Cheeks,Shape,No tiene
+00003,Nose,test2,No tiene
+00003,Ears,Shape,No tiene
+00003,Mouth,test2,No tiene
+00003,Chin,Shape,No tiene
+00003,Others,Shape,No tiene
+00020,Face,Shape,Diamante
+00020,Hair,Texture,Liso
+00020,Hair,Symmetry,Partido a la mitad
+00020,Hair,Shape,no tiene algun
+00020,Hair,Length,Corto
+00020,Eyebrows,Shape,No tiene
+00020,Eyes,test2,No tiene
+00020,Cheeks,Shape,No tiene
+00020,Nose,test2,No tiene
+00020,Ears,Shape,No tiene
+00020,Mouth,test2,No tiene
+00020,Chin,Shape,No tiene
+00020,Others,Shape,No tiene
