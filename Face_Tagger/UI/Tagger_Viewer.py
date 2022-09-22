@@ -245,12 +245,12 @@ class Tagger_Viewer_Logic:
         for n in range(0, len(self.group_size)):
             # save the components with your classification
             if self.group_type[n] == 'Combo':
-                print('entro')
+               
                 group_data_dict_temp[i] = value_temp[value_index[temp]]
                 temp = temp + 1
 
             elif self.group_type[n] == 'Radio':
-                print('entro')
+                
                 if value_temp[value_index[temp]]:
                     group_data_dict_temp[i] = 'Si tiene'
 
@@ -260,14 +260,16 @@ class Tagger_Viewer_Logic:
                 temp = temp + 2
 
             elif self.group_type[n] == 'Check':
-                print('entro')
+                
                 for n2 in range(0, self.group_size[n]):
 
                     if value_temp[value_index[temp]] is True and flag == 0:
+                        print(value_temp)
                         group_data_dict_temp[i] = value_index[temp]
                         flag = 1
 
                     elif value_temp[value_index[temp]]:
+                        
                         group_data_dict_temp[i] = f'{group_data_dict_temp[i]}-{value_index[temp]}'
 
                     temp = temp + 1
@@ -299,7 +301,7 @@ class Tagger_Viewer_Logic:
                 i += 1
                 if i >= start_viewer[2]:
                     i -= start_viewer[2]
-                print(values)
+                #print(values)
                 fnames_temp = fnames[i].split('.')
 
                 if tab_menu_attrib_object.search_id(fnames_temp[0])[0]:
@@ -328,7 +330,7 @@ class Tagger_Viewer_Logic:
                 self.group_data(value_temp)
                 fnames_temp = fnames[i].split('.')
                 self.group_data_dict[0] = fnames_temp[0]
-                print(self.group_data_dict)
+                #print(self.group_data_dict)
                 tab_menu_attrib_object.phrases_data = self.group_data_dict
                 tab_menu_attrib_object.phrases_data_names = value_temp
 

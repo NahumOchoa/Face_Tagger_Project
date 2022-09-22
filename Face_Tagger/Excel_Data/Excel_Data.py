@@ -162,6 +162,7 @@ class Excel_Data:
 
                 list_data = [self.phrases_data[0], tab_menu_attrib.sheet_names[n], tab_menu_attrib_temp_titles[2:-2:],
                              self.phrases_data[temp + 1]]
+                           
                 print(self.phrases_data[temp + 1])
                 with open(self.csv_url, 'a', newline='') as f_object:
                     # Pass the CSV  file object to the writer() function
@@ -189,7 +190,7 @@ class Excel_Data:
     # modify csv data for that ID
     def modify_csv_data(self, tab_menu_attrib):
         temp = 0
-        print('modify')
+        #print('modify')
         # modify the csv data
         with fileinput.input(files=self.csv_url, inplace=True, mode='r') as f:
             reader = csv.DictReader(f)
@@ -226,7 +227,7 @@ class Excel_Data:
         for n in range(0, df_index):
             data_clean = str(data.values[n])
             if data_clean[2:-2:] == id_person:
-                print('entro')
+                
                 return (True, n)
 
         return (False, None)
