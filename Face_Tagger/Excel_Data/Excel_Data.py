@@ -156,14 +156,18 @@ class Excel_Data:
         print(self.phrases_data)
         for n in range(0, len(tab_menu_attrib.sheet_names) - 1):
             ranges = tab_menu_attrib.tab_menu_index[i]
+            print(ranges)
+            if (ranges == 5):
+                ranges = 7
 
             for n2 in range(0, ranges):
                 tab_menu_attrib_temp_titles = str(tab_menu_attrib.tab_menu_atrib_names[temp])
 
                 list_data = [self.phrases_data[0], tab_menu_attrib.sheet_names[n], tab_menu_attrib_temp_titles[2:-2:],
                              self.phrases_data[temp + 1]]
-                           
-                print(self.phrases_data[temp + 1])
+                #print(list_data)
+                #print(self.phrases_data[12])
+                #
                 with open(self.csv_url, 'a', newline='') as f_object:
                     # Pass the CSV  file object to the writer() function
                     writer_object = writer(f_object)
@@ -212,7 +216,8 @@ class Excel_Data:
                 tab_menu_attrib_temp_titles = str(tab_menu_attrib.tab_menu_atrib_names[temp])
                 # modify the row with the parameter ID equal to the getter
                 if row["ID"] == self.phrases_data[0]:
-                    row['Value'] = self.phrases_data[temp + 1]
+                    row['Value'] = self.phrases_data[temp + 1]                    
+                    
                     temp = temp + 1
 
                 print(",".join([row["ID"], row["Type"], row['Name'], row['Value']]))
